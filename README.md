@@ -2,12 +2,12 @@
 Login : admin
 Password: 123456
 
-<h1>Societe</h1>
-Login : societe
+<h1>CLIENT</h1>
+Login : med
 Password: 123456
 
-<h1>Comptable</h1>
-Login : comptable
+<h1>DEVELOPPEUR</h1>
+Login : badr
 Password: 123456
 
 
