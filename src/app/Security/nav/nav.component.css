@@ -1,0 +1,13 @@
+nav{
+    background-color: #0772b3;
+    z-index: 2;
+}
+li a{
+    color: white;
+}
+a.navbar-brand{
+    color: white;
+}
+/*nav.navbar-expand{
+    width: 100%;
+}*/

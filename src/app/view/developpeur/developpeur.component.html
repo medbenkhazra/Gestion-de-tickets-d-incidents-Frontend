@@ -1,0 +1,156 @@
+
+<div class="card">
+    <div class="card-header p-d-flex p-jc-center"> <h2 class="text-center"> Tickets </h2></div>
+
+    <div class="card-body">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">titre :</label>
+                <p-dropdown id="ice"  optionLabel="ice" placeholder="Sélectionner un titre" [(ngModel)]="ticketVo.titre"></p-dropdown>
+                <!-- <input id="firstname1" type="number" [(ngModel)]="demandeVo.societe" pInputText>-->
+            </div>
+
+            <div class="p-field p-col">
+                <label for="firstname1">Environnement :</label>
+                <input id="firstname1" type="number" [(ngModel)]="ticketVo.environnement" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">logiciel:</label>
+                <input id="lastname1" [(ngModel)]="ticketVo.logiciel" type="number" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">priorite:</label>
+                <input id="lastname1" [(ngModel)]="ticketVo.priorite" type="number" pInputText>
+            </div>
+            <!-- <div class="p-field p-col">
+                 <label for="firstname1">Opération :</label>
+                 <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="Sélectionner le type"></p-dropdown>
+                 &lt;!&ndash; <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>&ndash;&gt;
+             </div>-->
+        </div>
+    </div>
+    <div class="card-footer p-d-flex p-jc-center"><p-button label="Rechercher" icon="pi pi-search" (onClick)="searchDeclaration()" ></p-button></div>
+</div>
+
+
+
+
+
+
+
+
+<div class="p-grid p-mt-3">
+    <div class="p-col-12">
+
+        <p-toast></p-toast>
+
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                            (click)="openCreate()"></button>
+                    <button pButton pRipple label="effacer" icon="pi pi-trash" class="p-button-danger p-mb-2"
+                            (click)="deleteMultiple()" [disabled]="!selectes || !selectes.length"></button>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="importer"
+                                  chooseLabel="Import" class="p-mr-2 p-mb-2 p-d-inline-block"></p-fileUpload>
+                    <!--<button pButton pRipple label="Exporter" icon="pi pi-upload" class="p-button-help p-mb-2"
+                            (click)="convert()"></button>-->
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="6" [paginator]="true"
+                     [globalFilterFields]="['reference','total','totalPaye']"
+                     [(selection)]="selectes" [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Montrant {first} à {last} des {totalRecords} entrées"
+                     [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Gérer les déclarations</h5>
+                        <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="chercher..."/>
+                    </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="reference">Id <!--<p-sortIcon field="reference"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">titre <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">date Ouverture <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">date Fermeture <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">environnement <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">logiciel <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">statut <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">priorite <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+
+
+
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ticket>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="ticket"></p-tableCheckbox>
+                        </td>
+                        <td>{{ticket.id}}</td>
+                        <td>{{ticket.titre}}</td>
+                        <td>{{this.datepipe.transform(ticket.dateOuverture,'yyyy-MM-dd')}}</td>
+                        <td>{{ticket.dateFermeture}}</td>
+                        <td>{{ticket.environnement}}</td>
+                        <td>{{ticket.logiciel}}</td>
+                        <td>{{ticket.statut}}</td>
+                        <td>{{ticket.priorite}}</td>
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="edit(ticket)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="view(ticket)"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-warning"
+                                    (click)="editStatut(ticket)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        Au total il y a {{items ? items.length : 0 }} éléments.
+                    </div>
+                    <!-- <div class="footer p-grid p-justify-around  ">
+
+                         <div class="p-inputgroup p-col-2">
+                             <span class="p-inputgroup-addon">DH</span>
+                             <input type="text" pInputText placeholder="{{declarationIR.total}}">
+
+                         </div>
+
+                         &lt;!&ndash; <div class="footer-two">&ndash;&gt;
+                         &lt;!&ndash; <p-button  [disabled]="isSaved" class=" p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></p-button>&ndash;&gt;
+                         <button *ngIf="!validation" pButton [disabled]="isSaved" type="button" class="p-button-danger my p-col-2" label="sauvegarder (brouillon)"
+                                 icon="pi pi-save" iconPos="left" (click)="save()"></button>
+                         <button *ngIf="validation" pButton  type="button" class="p-button-danger my p-col-2" label="Valider"
+                                 icon="pi pi-save" iconPos="left" (click)="valideDeclaration()"></button>
+                         &lt;!&ndash; </div>&ndash;&gt;
+
+                     </div>-->
+                </ng-template>
+
+            </p-table>
+        </div>
+        <app-developpeur-create></app-developpeur-create>
+        <app-developpeur-edit></app-developpeur-edit>
+        <app-developpeur-view></app-developpeur-view>
+
+
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Modification du ticket" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="ref">Titre :</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.titre" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.titre">ref is required.</small>
+        </div>
+
+        <div class="p-field  ">
+            <label for="operation">Environnement :</label>
+            <p-dropdown id="operation" [options]="environnements" [(ngModel)]="environnementSelected" optionLabel="environnement" placeholder="sélectionner un environnement"></p-dropdown>
+        </div>
+
+        <div class="p-field">
+            <label for="ref">Logiciel :</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.logiciel" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.logiciel">ref is required.</small>
+        </div>
+        <div class="p-field  ">
+            <label for="operation">Priorité :</label>
+            <p-dropdown id="priorite" [options]="priorites" [(ngModel)]="prioriteSelected" optionLabel="priorite" placeholder="sélectionner une priorite"></p-dropdown>
+        </div>
+
+
+        <div class="p-field">
+            <label for="total">Description :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.description" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.description">total is required.</small>
+        </div>
+
+
+
+       <!-- <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="totalPaye">Email:</label>
+                <p-inputNumber id="totalPaye" [(ngModel)]="selected.email"></p-inputNumber>
+            </div>
+        </div>-->
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Modifier" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
+    </ng-template>
+</p-dialog>
+

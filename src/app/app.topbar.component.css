@@ -1,0 +1,90 @@
+/*
+h6{
+    font-weight: bolder;
+    font-size: 25px;
+    color: white;
+
+}
+.layout-topbar-logo{
+    text-underline: none;
+    text-decoration-line: none;
+}
+#sign-out, #sign-in, #sign-up{
+    color: white;
+    font-size: 16px;
+}
+*/
+
+/*Style de texte et police*/
+
+
+/*GRID*/
+#box1{
+    /*background-color: #023F4A;*/
+    font-weight: normal;
+    font-size: 17px;
+}
+
+/*MENU*/
+
+#ul1{
+    display: flex;
+    justify-content: start;
+    list-style: none;
+    margin: auto;
+}
+
+.item{
+    float: left;
+    padding-top: 3px;
+}
+
+#ul1::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.item a {
+    display: inline-block;
+    padding: 10px 20px;
+    width: 150px;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+/*
+.item >a:hover{
+    color: black;
+    background-color: #E4E4EC;
+    border-radius: 5px;
+}
+*/
+#box1 > #ul1 > .item > a{ padding: 10px 20px; }
+
+.item li:hover > ul{ display: block;}
+
+#sign-out, #sign-in, #sign-up{
+    color: white;
+}
+#lii{
+    float: right;
+    margin-left: 40%;
+    padding: 0;
+}
+#lii{
+    display: flex;
+    flex-direction: row;
+    margin-top: -10px;
+}
+ul.topbar-menu{
+    display: flex;
+    flex-direction: row;
+}
+li.user-profile{
+    display: flex;
+    flex-direction: row;
+}
+.layout-profile-userinfo{
+    display: flex;
+    flex-direction: row;
+}

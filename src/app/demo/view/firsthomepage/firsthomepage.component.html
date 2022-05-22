@@ -1,0 +1,137 @@
+<div class="container-fluid">
+    <div class="header">
+        <!--  <div id="box1" style="z-index: 4"> navbar (MENU)
+            <ul>
+                <h4 id="badge">E-COMPTA</h4>
+                <li><a (click)="goToHome()">Acceuil</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a (click)="goToContact()" routerLinkActive="active">Contacts</a></li>
+                <a href="/login" routerLink="/login" style="width: 120px; text-decoration-line: none" id="sign-indiv">
+                    <div><span><i class="pi pi-sign-in" style="margin-right: 8px; color: white"></i><span id="sign-in">LogIn</span></span></div>
+                </a>
+
+                <a href="/sign-up" routerLink="sign-up" style="width: 120px; text-decoration-line: none">
+                    <div><span><i class="pi pi-user-plus" style="margin-right: 8px; color: white"></i><span id="sign-up">SignUp</span></span></div>
+                </a>
+            </ul>
+        </div> --><!--fin_navbar-->
+        <img style="z-index: 0" src="../../../../assets/images/imgaccueil.jpg" alt="image d'accueil" id="imgaccueil">
+        <!--
+        <div id="tit"><h2>E-COMPTA</h2>
+            <p>WE ARE HERE TO HELP YOU</p>
+        </div>-->
+    </div>
+    <div class="serv1">
+        <div>
+            <i class="bi bi-calculator"></i>
+            <h1>Services de comptabilité</h1>
+            <p style="font-size: 20px">L'application offre une gamme complète de services comptables complets aux entreprises : déclarations IR, déclarations IS, déclarations TVA</p>
+        </div>
+    </div>
+    <div class="serv2">
+        <div>
+            <i class="bi bi-clipboard-check"></i>
+            <h1>Impôt de taxes</h1>
+            <p style="font-size: 20px">ce service permet de soumettre et de consulter vos déclarations</p>
+        </div>
+    </div>
+    <div class="serv3">
+        <div>
+            <h1>services financiers</h1>
+            <h3>L'application fournit divers services financiers, notamment l'assurance, la gestion de patrimoine, le conseil fiscal, etc.</h3>
+        </div>
+    </div>
+    <div class="textis">
+        <div class="tauxIsDiv">
+            <h3>Taux de l'impôt sur les sociétés</h3>
+            <h4>Barème normal - Année 2020</h4>
+            <p>La loi de finances 2020 a introduit une nouvelle grille de l’IS progressif présenté dans la tableau.</p>
+        </div>
+    </div>
+    <div class="contentis">
+        <div class="p-shadow-14">
+            <table class="w3-table">
+                <tr>
+                    <th colspan="2">Bénéfice net fiscal en MAD</th>
+                    <th>Taux IS </th>
+                </tr>
+                <tr>
+                    <td>0.00 </td>
+                    <td>300 000.00</td>
+                    <td class="pourc">10 %</td>
+                </tr>
+                <tr>
+                    <td>300 001.00</td>
+                    <td>1 000 000.00</td>
+                    <td class="pourc">20 %</td>
+                </tr>
+                <tr>
+                    <td>1 000 001.00 </td>
+                    <td>+&infin;</td>
+                    <td class="pourc">31 %</td>
+                </tr>
+
+            </table>
+        </div>
+        </div>
+        <div class="textir">
+        <div class="tauxIsDiv">
+            <h3>Taux de l'impôt sur le revenu</h3>
+            <h4>Barème de l'impôt sur le revenu de l'année 2021</h4>
+            <p>Le barème de l’impôt sur le revenu sert à calculer le montant de l’impôt à payer à partir de l’impôt brut.</p>
+        </div>
+    </div>
+    <div class="contentir">
+        <div class="p-shadow-14">
+            <table class="w3-table">
+                <tr>
+                    <th colspan="2">Salaire en MAD</th>
+                    <th>Taux IR </th>
+                </tr>
+                <tr>
+                    <td>0.00 </td>
+                    <td>2 500.00</td>
+                    <td class="pourc">0 %</td>
+                </tr>
+                <tr>
+                    <td>2 501.00</td>
+                    <td>4 166.00</td>
+                    <td class="pourc">10 %</td>
+                </tr>
+                <tr>
+                    <td>4 167.00</td>
+                    <td>5 000.00</td>
+                    <td class="pourc">20 %</td>
+                </tr>
+                <tr>
+                    <td>5 001.00 </td>
+                    <td>6 666</td>
+                    <td class="pourc">30 %</td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    <div id="contactus" class="contactus" >
+        <img style="z-index: 0" src="assets/images/imgforcontact.jpg" alt="image contact" id="imgctc">
+        <div id="email">
+            <div class="dot"><i class="bi bi-envelope-fill"></i></div>
+            <p style="color: white; font-size: 27px">e-compta@ecompta.com</p>
+        </div>
+        <div id="tele" style="left: 33.33%">
+            <div class="dot"><i class="bi bi-telephone-fill"></i></div>
+            <p style="color: white; font-size: 27px">+212 5 00 00 00 00</p>
+        </div>
+        <div id="local" style="left: 66.66%">
+            <div class="dot"><i class="bi bi-geo-alt-fill"></i></div>
+            <p style="color: white; font-size: 27px;">00 Rue XXXXX Guéliz<br> 40000 Marrakech</p>
+        </div>
+        <div id="goup" (click)="goToHome()">
+            <i class="bi bi-arrow-up"></i>
+        </div>
+    </div>
+    <!--
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>
+    -->
+</div>

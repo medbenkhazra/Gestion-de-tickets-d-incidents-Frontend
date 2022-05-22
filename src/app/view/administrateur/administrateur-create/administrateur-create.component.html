@@ -1,0 +1,64 @@
+<p-dialog [(visible)]="createDialog"  [style]="{width: '450px'}" header="Creation du ticket" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <div class="p-field">
+            <label for="cin">Titre :</label>
+            <input type="text" pInputText id="nom" [(ngModel)]="selected.titre" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.titre">total is required.</small>
+        </div>
+
+        <div class="p-field  ">
+            <label for="operation">Environnement :</label>
+            <p-dropdown id="operation" [options]="environnements" [(ngModel)]="environnementSelected" optionLabel="environnement" placeholder="sélectionner un environnement"></p-dropdown>
+        </div>
+
+        <!--<div class="p-field">
+            <label for="cin">Environnement :</label>
+            <input type="text" [ngModelOptions]="environnements" pInputText id="email" [(ngModel)]="selected.environnement" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.environnement">total is required.</small>
+        </div>-->
+
+        <div class="p-field">
+            <label for="cin">Logiciel :</label>
+            <input type="text" pInputText id="email" [(ngModel)]="selected.logiciel" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.logiciel">total is required.</small>
+        </div>
+
+        <div class="p-field  ">
+            <label for="operation">Priorité :</label>
+            <p-dropdown id="priorite" [options]="priorites" [(ngModel)]="prioriteSelected" optionLabel="priorite" placeholder="sélectionner une priorite"></p-dropdown>
+        </div>
+
+        <!--<div class="p-field">
+            <label for="cin">Priorite :</label>
+            <input type="text" pInputText id="email" [(ngModel)]="selected.priorite" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.priorite">total is required.</small>
+        </div>-->
+
+        <div class="p-field">
+            <label for="ref">Date d'ouverture :</label>
+            <p-calendar [(ngModel)]="selected.dateOuverture" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+        <div class="p-field">
+            <label for="ref">Date de fermeture :</label>
+            <p-calendar [(ngModel)]="selected.dateFermeture" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+
+        <div class="p-field">
+            <label for="cin">Description :</label>
+            <textarea pInputTextarea [(ngModel)]="selected.description"></textarea>
+        </div>
+
+
+
+
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Sauvegarder" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>
+

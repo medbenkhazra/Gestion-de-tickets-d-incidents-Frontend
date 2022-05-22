@@ -1,0 +1,95 @@
+<div class="login-body">
+    <div class="card login-panel p-fluid">
+        <div class="login-panel-content">
+            <div class="p-grid">
+                <div class="p-col-12 p-sm-6 p-md-6 logo-container">
+                    <div><h3>Sign up</h3></div>
+                </div>
+
+
+                <div class="p-col-12 username-container">
+                    <!-- <h:panelGroup> -->
+                    <label>Username</label>
+                    <div class="login-input">
+                        <input #username="ngModel" id="input" type="text" pInputText [(ngModel)]="user.username">
+                        <div class="alert-danger" *ngIf=" username.invalid">
+                            <div *ngIf="username.errors.required">Username is required</div>
+                            <div *ngIf="username.errors.minlength">
+                                Username must be at least 3 characters
+                            </div>
+                            <div *ngIf="username.errors.maxlength">
+                                Username must be at most 20 characters
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </h:panelGroup> -->
+                </div>
+
+
+
+
+                <div class="p-col-12 username-container">
+                    <!-- <h:panelGroup> -->
+                    <label>Email :</label>
+                    <div class="login-input">
+                        <input pInputText type="text" [(ngModel)]="user.email" required
+                               email
+                               #email="ngModel"/>
+                        <div class="alert-danger" *ngIf="email.invalid">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">
+                                Email must be a valid email address
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </h:panelGroup> -->
+                </div>
+
+
+                <div class="p-col-12 password-container">
+                    <!-- <h:panelGroup> -->
+                    <label>Password :</label>
+                    <div class="login-input">
+                        <input pPassword type="password" [(ngModel)]="user.password" #password="ngModel" />
+                        <div class="alert-danger" *ngIf="password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-warning" *ngIf="isSignUpFailed">
+                        Signup failed!<br />{{ errorMessage }}
+                    </div>
+                    <!-- </h:panelGroup> -->
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <div class="p-col-12 p-sm-6 p-md-6">
+                    <button   pButton type="button" icon="pi pi-check" label="Sign Up" (click)="onSubmit()"></button>
+                </div>
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                    Your registration is successful!
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,45 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Details de Declarations" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="ref">Titre :</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.titre" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Date Ouverture :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.dateOuverture" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">date Fermeture :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.dateFermeture" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Environnement :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.environnement" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Logiciel :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.logiciel" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Statut :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.statut" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Priorité :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.priorite" disabled />
+        </div>
+
+        <div class="p-field">
+            <label for="total">description :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.description" disabled />
+        </div>
+
+
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+    </ng-template>
+</p-dialog>
