@@ -8,7 +8,12 @@ import {DatePipe} from '@angular/common';
 import {TicketVo} from '../../controller/model/ticket-vo.model';
 import {Ticket} from '../../controller/model/ticket.model';
 import {Developpeur} from '../../controller/model/developpeur.model';
-
+interface com{
+    environnement: string;
+}
+interface priorite{
+    priorite: string;
+}
 @Component({
     selector: 'app-administrateur',
     templateUrl: './administrateur.component.html',
@@ -17,9 +22,28 @@ import {Developpeur} from '../../controller/model/developpeur.model';
 export class AdministrateurComponent implements OnInit {
 
     cols: any[];
+    environnements=new Array<com>();
+    environnementSelected: com;
+    priorites=new Array<priorite>();
+    prioriteSelected: priorite;
 
     constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
                 private service: AdministrateurService, public datepipe: DatePipe) {
+        this.environnements = [
+            {environnement: 'Windows'},
+            {environnement: 'Linux'},
+            {environnement: 'Android'},
+            {environnement: 'IOS'},
+            {environnement: 'Mac Os'},
+        ];
+
+        this.priorites = [
+            {priorite: 'critique'},
+            {priorite: 'urgent'},
+            {priorite: 'non urgent'},
+            {priorite: 'normal'},
+
+        ];
     }
 
 
@@ -178,6 +202,20 @@ export class AdministrateurComponent implements OnInit {
 
     set selectes(value: Array<Ticket>) {
         this.service.selectes = value;
+    }
+    public rechercheMultiCritere(){
+        this.ticketVo.environnement=this.environnementSelected.environnement;
+        this.ticketVo.priorite=this.prioriteSelected.priorite;
+        this.service.rechercheMultiCritere().subscribe(
+            data=>{
+                console.log("recheeeeerche multi critere");
+                console.log(data);
+                this.items=data;
+
+            },error => {
+                console.log(error);
+            }
+        );
     }
 
     ngOnInit(): void {

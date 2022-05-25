@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 
 
@@ -7,18 +7,47 @@ import {Ticket} from '../../controller/model/ticket.model';
 
 import {TicketVo} from '../../controller/model/ticket-vo.model';
 import {DatePipe} from '@angular/common';
-import {error} from 'protractor';
-import {TokenStorageService} from '../../Security/_services/token-storage.service';
 
+import {TokenStorageService} from '../../Security/_services/token-storage.service';
+import {User} from '../../controller/model/user.model';
+interface com{
+  environnement: string;
+}
+interface priorite{
+  priorite: string;
+}
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss']
 })
+
+
 export class ClientComponent implements OnInit {
   cols: any[];
+  environnements=new Array<com>();
+  environnementSelected: com;
+  priorites=new Array<priorite>();
+  prioriteSelected: priorite;
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-              private service: ClientService,public datepipe: DatePipe,private tokenStorageService: TokenStorageService) { }
+              private service: ClientService,public datepipe: DatePipe,private tokenStorageService: TokenStorageService) {
+
+    this.environnements = [
+      {environnement: 'Windows'},
+      {environnement: 'Linux'},
+      {environnement: 'Android'},
+      {environnement: 'IOS'},
+      {environnement: 'Mac Os'},
+    ];
+
+    this.priorites = [
+      {priorite: 'critique'},
+      {priorite: 'urgent'},
+      {priorite: 'non urgent'},
+      {priorite: 'normal'},
+
+    ];
+  }
 
 
 
@@ -37,6 +66,20 @@ export class ClientComponent implements OnInit {
       {field: 'priorite', header: 'Priorite'},
 
     ];
+  }
+  public rechercheMultiCritere(){
+    this.ticketVo.environnement=this.environnementSelected.environnement;
+    this.ticketVo.priorite=this.prioriteSelected.priorite;
+    this.service.rechercheMultiCritere().subscribe(
+        data=>{
+          console.log("recheeeeerche multi critere");
+          console.log(data);
+          this.items=data;
+
+        },error => {
+          console.log(error);
+        }
+    );
   }
 
   get ticketVo(): TicketVo {
@@ -171,8 +214,17 @@ export class ClientComponent implements OnInit {
     this.service.selectes = value;
   }
 
+  get currentUser(): User {
+    return this.service.currentUser;
+  }
+
+  set currentUser(value: User) {
+    this.service.currentUser = value;
+  }
+
   ngOnInit(): void {
     this.initCol();
+    this.
  /*   this.service.findAll().subscribe(
         data=>{
           console.log("thiis is all tickets");
@@ -182,12 +234,17 @@ export class ClientComponent implements OnInit {
           console.log(error);
         }
     );*/
-    this.tokenStorageService.findUserByUsername(this.tokenStorageService.getUser().username).subscribe(
+    tokenStorageService.findUserByUsername(this.tokenStorageService.getUser().username).subscribe(
         data=>{
           console.log("jaab data actual user");
           console.log(data);
+
           this.items=data['client']['tickets'];
           console.log(this.items);
+          this.currentUser=data;
+          console.log("data parsed to actual user***-*");
+          console.log(this.currentUser);
+
         },error=>{
           console.log(error);
         }

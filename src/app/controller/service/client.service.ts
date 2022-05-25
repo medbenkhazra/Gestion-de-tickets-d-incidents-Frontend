@@ -8,6 +8,8 @@ import {Ticket} from '../model/ticket.model';
 import {TicketVo} from '../model/ticket-vo.model';
 
 import {Client} from '../model/client.model';
+import {User} from '../model/user.model';
+import {ClientComponent} from '../../view/client/client.component';
 
 @Injectable({
     providedIn: 'root'
@@ -28,6 +30,27 @@ export class ClientService {
     private _viewDialog: boolean;
     private _submitted: boolean;
     private _ticketVo: TicketVo;
+    private _currentUser:User;
+
+
+
+ /*   public invokeOninitParent():void{
+        this.clientComponent.ngOnInit();
+    }*/
+
+    public rechercheMultiCritere(): Observable<any>{
+        console.log('object send');
+        console.log(this.ticketVo);
+        return this.http.post<any>(environment.baseUrl+'ticket/multi',this.ticketVo);
+    }
+
+    get currentUser(): User {
+        return this._currentUser;
+    }
+
+    set currentUser(value: User) {
+        this._currentUser = value;
+    }
 
     public deleteMultipleIndexById() {
         for (const item of this.selectes) {
@@ -46,8 +69,11 @@ export class ClientService {
     }
 
     public edit(): Observable<any> {
+        this.selected.client=this.currentUser.client;
+        this.selected.client.tickets=null;
+        console.log(this.selected);
 
-        return this.http.post<Ticket>(environment.baseUrl + 'ticket/', this.selected);
+        return this.http.patch<Ticket>(environment.baseUrl + 'ticket/', this.selected);
     }
 
     public deleteByIdselectedItems(id: number): Observable<any> {
@@ -87,6 +113,7 @@ export class ClientService {
         const now = new Date();
         this.selected.dateOuverture = now;
         this.selected.statut = 'en cours de traitement';
+        this.selected.client = this.currentUser.client;
         return this.http.post<Ticket>(environment.baseUrl + 'ticket/', this.selected);
     }
 

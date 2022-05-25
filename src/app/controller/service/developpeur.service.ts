@@ -46,14 +46,21 @@ export class DeveloppeurService {
 /*  public updateStatut():Observable<any>{
     return this.http.put();
   }*/
+  public rechercheMultiCritere(): Observable<any>{
+    console.log('object send');
+    console.log(this.ticketVo);
+    return this.http.post<any>(environment.baseUrl+'ticket/multi',this.ticketVo);
+  }
 
   public edit(): Observable <any>{
 
-    return this.http.post<Ticket>(environment.baseUrl + 'ticket/',this.selected);
+    return this.http.patch<Ticket>(environment.baseUrl + 'ticket/',this.selected);
   }
 
   public editStatut(): Observable <any>{
     this.selected.statut="résolu";
+    this.selected.client=null;
+    this.selected.developpeur=null;
     console.log(this.selected);
     return this.http.patch<Ticket>(environment.baseUrl + 'ticket/',this.selected);
   }

@@ -7,7 +7,12 @@ import {Ticket} from '../../controller/model/ticket.model';
 import {DeveloppeurService} from '../../controller/service/developpeur.service';
 import {TokenStorageService} from '../../Security/_services/token-storage.service';
 import {element} from 'protractor';
-
+interface com{
+  environnement: string;
+}
+interface priorite{
+  priorite: string;
+}
 @Component({
   selector: 'app-developpeur',
   templateUrl: './developpeur.component.html',
@@ -15,8 +20,29 @@ import {element} from 'protractor';
 })
 export class DeveloppeurComponent implements OnInit {
   cols: any[];
+  environnements=new Array<com>();
+  environnementSelected: com;
+  priorites=new Array<priorite>();
+  prioriteSelected: priorite;
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-              private service: DeveloppeurService,public datepipe: DatePipe,private tokenStorageService: TokenStorageService) { }
+              private service: DeveloppeurService,public datepipe: DatePipe,private tokenStorageService: TokenStorageService) {
+
+    this.environnements = [
+      {environnement: 'Windows'},
+      {environnement: 'Linux'},
+      {environnement: 'Android'},
+      {environnement: 'IOS'},
+      {environnement: 'Mac Os'},
+    ];
+
+    this.priorites = [
+      {priorite: 'critique'},
+      {priorite: 'urgent'},
+      {priorite: 'non urgent'},
+      {priorite: 'normal'},
+
+    ];
+  }
 
 
 
@@ -80,6 +106,7 @@ export class DeveloppeurComponent implements OnInit {
 
 
 
+
         this.selected = new Ticket();
         this.messageService.add({
           severity: 'success',
@@ -93,6 +120,20 @@ export class DeveloppeurComponent implements OnInit {
 
 
 
+  }
+  public rechercheMultiCritere(){
+    this.ticketVo.environnement=this.environnementSelected.environnement;
+    this.ticketVo.priorite=this.prioriteSelected.priorite;
+    this.service.rechercheMultiCritere().subscribe(
+        data=>{
+          console.log("recheeeeerche multi critere");
+          console.log(data);
+          this.items=data;
+
+        },error => {
+          console.log(error);
+        }
+    );
   }
 
   public view(ticket: Ticket) {

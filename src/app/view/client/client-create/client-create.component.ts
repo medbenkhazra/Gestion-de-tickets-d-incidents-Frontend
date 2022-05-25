@@ -3,6 +3,8 @@ import {MessageService} from 'primeng/api';
 
 import {ClientService} from '../../../controller/service/client.service';
 import {Ticket} from '../../../controller/model/ticket.model';
+import {User} from '../../../controller/model/user.model';
+import {Router} from '@angular/router';
 
 interface com{
   environnement: string;
@@ -20,7 +22,7 @@ export class ClientCreateComponent implements OnInit {
   environnementSelected: com;
   priorites=new Array<priorite>();
   prioriteSelected: priorite;
-  constructor(private messageService: MessageService, private service: ClientService) {
+  constructor(private messageService: MessageService, private service: ClientService, private router: Router) {
     this.environnements = [
       {environnement: 'Windows'},
       {environnement: 'Linux'},
@@ -47,21 +49,38 @@ export class ClientCreateComponent implements OnInit {
     this.submitted = false;
   }
 
+  get currentUser(): User {
+    return this.service.currentUser;
+  }
+
+  set currentUser(value: User) {
+    this.service.currentUser = value;
+  }
+
+ /* public invokeOninitParent():void{
+    this.service.invokeOninitParent();
+  }
+*/
   public save() {
     this.submitted = true;
     this.selected.environnement = this.environnementSelected.environnement;
     this.selected.priorite = this.prioriteSelected.priorite;
 
+
+
     this.service.save().subscribe(
         data=>{
           console.log("admin saved");
-          this.ngOnInit();
+
         },error => {
           console.log(error);
         }
     );
 
     this.items.push({...this.selected});
+   // this.invokeOninitParent();
+   // this.router.navigate(['client']);
+    window.location.reload();
     this.messageService.add({
       severity: 'success',
       summary: 'Succès',

@@ -67,6 +67,7 @@ export class AdministrateurCreateComponent implements OnInit {
         );
 
         this.items.push({...this.selected});
+        //window.location.reload();
         this.messageService.add({
             severity: 'success',
             summary: 'Succès',

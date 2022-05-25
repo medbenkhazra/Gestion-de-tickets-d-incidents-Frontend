@@ -4,24 +4,44 @@
 
     <div class="card-body">
         <div class="p-fluid p-formgrid p-grid">
+
             <div class="p-field p-col">
-                <label for="firstname1">titre :</label>
-                <p-dropdown id="ice"  optionLabel="ice" placeholder="Sélectionner un titre" [(ngModel)]="ticketVo.titre"></p-dropdown>
-                <!-- <input id="firstname1" type="number" [(ngModel)]="demandeVo.societe" pInputText>-->
+                <label for="firstname1">Titre :</label>
+                <input id="firstname1" type="text" [(ngModel)]="ticketVo.titre" pInputText>
             </div>
 
             <div class="p-field p-col">
                 <label for="firstname1">Environnement :</label>
-                <input id="firstname1" type="number" [(ngModel)]="ticketVo.environnement" pInputText>
+                <p-dropdown id="ice"  optionLabel="ice" [options]="environnements"  placeholder="Sélectionner un environement" [(ngModel)]="environnementSelected" optionLabel="environnement"></p-dropdown>
+
             </div>
+            <div class="p-field p-col">
+                <label for="firstname1">Priorite :</label>
+                <p-dropdown id="ice"  optionLabel="ice" placeholder="Sélectionner une propriete" [options]="priorites"  [(ngModel)]="prioriteSelected" optionLabel="priorite"></p-dropdown>
+            </div>
+
+           <!-- <div class="p-field p-col">
+                <label for="firstname1">Environnement :</label>
+                <input id="firstname1" type="number" [(ngModel)]="ticketVo.environnement" pInputText>
+            </div>-->
             <div class="p-field p-col">
                 <label for="lastname1">logiciel:</label>
                 <input id="lastname1" [(ngModel)]="ticketVo.logiciel" type="number" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">priorite:</label>
-                <input id="lastname1" [(ngModel)]="ticketVo.priorite" type="number" pInputText>
+                <label for="ref">Date d'ouverture :</label>
+                <p-calendar [(ngModel)]="ticketVo.dateOuverture" dateFormat="yy-mm-dd"></p-calendar>
             </div>
+
+            <div class="p-field p-col">
+                <label for="ref">Date d'ouverture MIN :</label>
+                <p-calendar [(ngModel)]="ticketVo.dateOuvertureMin" dateFormat="yy-mm-dd"></p-calendar>
+            </div>
+            <div class="p-field p-col">
+                <label for="ref">Date d'ouverture MAX :</label>
+                <p-calendar [(ngModel)]="ticketVo.dateOuvertureMax" dateFormat="yy-mm-dd"></p-calendar>
+            </div>
+
            <!-- <div class="p-field p-col">
                 <label for="firstname1">Opération :</label>
                 <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="Sélectionner le type"></p-dropdown>
@@ -29,7 +49,7 @@
             </div>-->
         </div>
     </div>
-    <div class="card-footer p-d-flex p-jc-center"><p-button label="Rechercher" icon="pi pi-search" (onClick)="searchDeclaration()" ></p-button></div>
+    <div class="card-footer p-d-flex p-jc-center"><p-button label="Rechercher" icon="pi pi-search" (onClick)="rechercheMultiCritere()" ></p-button></div>
 </div>
 
 

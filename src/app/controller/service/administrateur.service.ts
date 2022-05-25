@@ -59,10 +59,15 @@ export class AdministrateurService {
 
         }
     }
+    public rechercheMultiCritere(): Observable<any>{
+        console.log('object send');
+        console.log(this.ticketVo);
+        return this.http.post<any>(environment.baseUrl+'ticket/multi',this.ticketVo);
+    }
 
     public edit(): Observable<any> {
         console.log(this.selected);
-        return this.http.post<Ticket>(environment.baseUrl + 'ticket/', this.selected);
+        return this.http.patch<Ticket>(environment.baseUrl + 'ticket/', this.selected);
     }
 
     public deleteByIdselectedItems(id: number): Observable<any> {
